@@ -42,6 +42,29 @@ const scrollActive = () =>{
 }
 window.addEventListener('scroll', scrollActive)
 
+document.querySelectorAll('.carousel').forEach(carousel => {
+    const images = carousel.querySelector('.carousel__images');
+    const prevButton = carousel.querySelector('.carousel__button--prev');
+    const nextButton = carousel.querySelector('.carousel__button--next');
+
+    let index = 0;
+
+    const updateCarousel = () => {
+        images.style.transform = `translateX(-${index * 100}%)`;
+    };
+
+    prevButton.addEventListener('click', () => {
+        index = (index - 1 + images.children.length) % images.children.length;
+        updateCarousel();
+    });
+
+    nextButton.addEventListener('click', () => {
+        index = (index + 1) % images.children.length;
+        updateCarousel();
+    });
+});
+
+
 /*===== SCROLL REVEAL ANIMATION =====*/
 const sr = ScrollReveal({
     origin: 'top',
@@ -55,3 +78,9 @@ sr.reveal('.home__data, .about__img, .skills__subtitle, .skills__text',{});
 sr.reveal('.home__img, .about__subtitle, .about__text, .skills__img',{delay: 400}); 
 sr.reveal('.home__social-icon',{ interval: 200}); 
 sr.reveal('.skills__data, .work__img, .contact__input',{interval: 200}); 
+sr.reveal('.education-card',{interval:200});
+sr.reveal('.experience-card', { interval: 200 });
+sr.reveal('.certification-card', { interval: 200 });
+sr.reveal('.work__project', { interval: 200 });
+
+
